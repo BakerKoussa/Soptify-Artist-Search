@@ -18,7 +18,7 @@ function AlbumCard(props) {
             {props.name}
           </h5>
           <h6 className="card-text" style={{ color: "grey" }}>
-            <small>{props.artistName} followers </small>
+            <small>{props.artistName} </small>
           </h6>
         </div>
         <div style={{ marginLeft: "2.5vh" }}>
