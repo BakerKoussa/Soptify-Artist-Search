@@ -18,7 +18,7 @@ function AlbumCard(props) {
             {props.name}
           </h5>
           <h6 className="card-text" style={{ color: "grey" }}>
-            <small>{props.artistName}</small>
+            <small>{props.artistName} </small>
           </h6>
         </div>
         <div style={{ marginLeft: "2.5vh" }}>
@@ -29,9 +29,9 @@ function AlbumCard(props) {
             <small>{props.numberOfTracks} tracks</small>
           </h6>
         </div>
-        <div className="card-footer">
+        <div class="card-footer">
           <a href={props.visitSpotify}>
-            <small className="text-muted fs-6">Previw on Spotify</small>
+            <small class="text-muted fs-6">Previw on Spotify</small>
           </a>
         </div>
       </div>
