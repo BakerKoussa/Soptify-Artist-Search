@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { Container, Form } from "react-bootstrap";
+import { Container, Form, InputGroup } from "react-bootstrap";
 import Card from "./Card";
 import ViewAlbums from "./ViewAlbums";
 
@@ -19,7 +19,7 @@ function Search(props) {
     if (localStorage.getItem("accessToken")) {
       setToken(localStorage.getItem("accessToken"));
       //console.log("Hello World: " + token);
-      if (search != "") getArtist(search);
+      if (search !== "") getArtist(search);
     }
   }, [token, search]);
 
@@ -82,13 +82,17 @@ function Search(props) {
           className="d-flex flex-column py-2"
           style={{ height: "20vh", marginTop: "10vh", width: "70%" }}
         >
-          <Form.Control
-            key="abc"
-            type="search"
-            placeholder="Search for Artists"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          ></Form.Control>
+          <InputGroup className="mb-2">
+            <Form.Control
+              key="abc"
+              type="search"
+              placeholder="Search for Artists"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              htmlSize="40"
+            ></Form.Control>
+            <InputGroup.Text>🔍</InputGroup.Text>
+          </InputGroup>
         </Container>
 
         {

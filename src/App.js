@@ -15,7 +15,6 @@ function App() {
   //localStorage.clear();
   //const token = localStorage.getItem("accessToken");
   const exp = localStorage.getItem("expiresIn");
-  //console.log(token);
   //console.log(exp);
   
   return (
