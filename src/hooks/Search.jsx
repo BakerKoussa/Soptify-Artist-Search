@@ -16,64 +16,54 @@ function Search(props) {
   const [albums, setAlbums] = useState([]);
 
   useEffect(() => {
+    const getArtist = (value) => {
+      async function searchForArtist() {
+        try {
+          const result = await axios.get(
+            searchForArtistUrl.concat("?type=artist&q=" + value),
+            {
+              headers: {
+                Authorization: "Bearer " + token,
+              },
+            }
+          );
+          setSearchResults(result.data.artists.items);
+        } catch (e) {
+          console.log(e);
+          localStorage.clear();
+        }
+      }
+      searchForArtist();
+    };
+
     if (localStorage.getItem("accessToken")) {
       setToken(localStorage.getItem("accessToken"));
-      //console.log("Hello World: " + token);
       if (search !== "") getArtist(search);
     }
   }, [token, search]);
 
   useEffect(() => {
-    if (Object.keys(theArtist).length !== 0) getAlbums(theArtist);
-  }, [theArtist]);
+    const getAlbums = (artist) => {
+      const id = artist.id;
 
-  const getArtist = (value) => {
-    //console.log(searchForArtistUrl.concat("?q=" + value));
-
-    async function searchForArtist() {
-      try {
-        const result = await axios.get(
-          searchForArtistUrl.concat("?type=artist&q=" + value),
-          {
+      async function searchForAlbums() {
+        try {
+          const result = await axios.get(viewAlbumsURL.replace("ID", id), {
             headers: {
               Authorization: "Bearer " + token,
             },
-          }
-        );
-        setSearchResults(result.data.artists.items);
-        //console.log(result.data.artists.items);
-        //console.log(searchResults);
-        //console.log(searchResults.length);
-      } catch (e) {
-        console.log(e);
-        localStorage.clear();
+          });
+          setAlbums(result.data.items);
+        } catch (e) {
+          console.log(e);
+          localStorage.clear();
+        }
       }
-    }
-    searchForArtist();
-    //console.log(value);
-  };
+      searchForAlbums();
+    };
 
-  const getAlbums = (artist) => {
-    const id = artist.id;
-    //console.log(viewAlbumsURL.replace("ID", id));
-
-    async function searchForAlbums() {
-      try {
-        const result = await axios.get(viewAlbumsURL.replace("ID", id), {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
-        //setSearchResults(result.data.artists.items);
-        setAlbums(result.data.items);
-        console.log(result.data.items);
-      } catch (e) {
-        console.log(e);
-        localStorage.clear();
-      }
-    }
-    searchForAlbums();
-  };
+    if (Object.keys(theArtist).length !== 0) getAlbums(theArtist);
+  }, [theArtist, token]);
 
   if (Object.keys(theArtist).length === 0) {
     return (

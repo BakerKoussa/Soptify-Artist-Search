@@ -29,9 +29,9 @@ function AlbumCard(props) {
             <small>{props.numberOfTracks} tracks</small>
           </h6>
         </div>
-        <div class="card-footer">
+        <div className="card-footer">
           <a href={props.visitSpotify}>
-            <small class="text-muted fs-6">Previw on Spotify</small>
+            <small className="text-muted fs-6">Previw on Spotify</small>
           </a>
         </div>
       </div>
